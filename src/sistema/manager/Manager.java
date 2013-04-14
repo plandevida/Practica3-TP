@@ -117,12 +117,12 @@ public class Manager {
 			listaejecutables.add(ciclista);
 			salidadatos.registrarObjetoConSalidaDatos(ciclista);
 		}
+		
 		//Se registran los factores externos
 		for (FactoresExternos factor : factores){
 			listaejecutables.add(factor);
 		}
-	
-		//
+		
 		salidadatos.registrarObjetoConSalidaDatos(reloj);
 		salidadatos.registrarObjetoConSalidaDatos(bicicleta);
 		salidadatos.registrarObjetoConSalidaDatos(bicicleta1);
@@ -133,7 +133,6 @@ public class Manager {
 		parser = new ParseadorComandos(dispatcher, listaejecutables);
 		
 		lector = new Lector(DEFAULT_COMANDOS_PATH, false);
-		
 	}
 	
 	/**

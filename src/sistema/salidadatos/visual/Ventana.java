@@ -15,7 +15,9 @@ import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.salidadatos.InterfaceSalidaDatos;
 
 public class Ventana extends JFrame implements InterfaceSalidaDatos {
-
+	
+	private static final long serialVersionUID = 1L;
+	
 	private JTextArea textcicli1;
 	private JTextArea textcicli2;
 	private JTextArea textcicli3;
@@ -25,9 +27,7 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	private JPanel panel3;
 	private JPanel panel4;
 
-	/**
-	 *  Lista de objetos que se van a mostrar
-	 */
+	// Lista de objetos que se van a mostrar
 	private List<ObjetosConSalidaDeDatos> registroobjetossalidadatos;
 	
 	public Ventana(){
