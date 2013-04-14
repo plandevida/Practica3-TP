@@ -20,8 +20,6 @@ public class Contador extends ObjetosQueSeEjecutan {
 	
 	/**
 	 * Método que añade un nuevo impulso al actual.
-	 * 
-	 * 
 	 */
 	public void nuevoImpulso() {
 		impulsos++;
