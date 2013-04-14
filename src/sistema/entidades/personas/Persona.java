@@ -2,7 +2,7 @@ package sistema.entidades.personas;
 
 import sistema.interfaces.ObjetosQueSeEjecutan;
 
-public class Persona implements ObjetosQueSeEjecutan {
+public class Persona extends ObjetosQueSeEjecutan {
 	//nombre de la persona
 	private String nombre;
 	
@@ -18,7 +18,9 @@ public class Persona implements ObjetosQueSeEjecutan {
 		cansancio = (estadofisico >= 0 && estadofisico < 100) ? estadofisico : 100;
 	}
 	
-	public boolean ejecutar() { return true; }
+	// Este método tiene que hacer las veces del antiguo ejecuta.
+	@Override
+	public void run() { }
 	
 	/**
 	 * Obtiene el peso de la persona.

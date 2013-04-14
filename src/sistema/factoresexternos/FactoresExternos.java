@@ -4,7 +4,6 @@ import java.util.Map;
 
 import sistema.entidades.carretera.tramocarreraciclista.TramoCiclista;
 import sistema.entidades.vehiculos.bicicletas.Bicicleta;
-import sistema.factoresexternos.viento.MiViento;
 import sistema.interfaces.ObjetosQueSeEjecutan;
 
 /**
@@ -12,7 +11,7 @@ import sistema.interfaces.ObjetosQueSeEjecutan;
  * @author Daniel Serrano Torres
  * @author Alvaro Quesada Pimentel
  */
-public class FactoresExternos implements ObjetosQueSeEjecutan {
+public class FactoresExternos extends ObjetosQueSeEjecutan {
 	
 	private Bicicleta bici;
 	
@@ -103,11 +102,9 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 
 
 	@Override
-	public boolean ejecutar() {
+	public void run() {
 		
 		setVelocidadModificada();
-		
-		return true;
 	}
 }
 

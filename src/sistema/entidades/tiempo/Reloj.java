@@ -6,10 +6,10 @@ import sistema.interfaces.ObjetosConSalidaDeDatos;
 
 
 public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
-	// Los segundos que lleva, es una unidad mas peque�a q los minutos
+	// Los segundos que lleva, es una unidad mas pequeña q los minutos
 	private int segundos;
 	
-	// Los minutos que lleva, es una unidad mas peque�a q las horas
+	// Los minutos que lleva, es una unidad mas pequeña q las horas
 	private int minutos;
 	
 	// Las horas que lleva, es la unidad mas grande del programa
@@ -24,12 +24,12 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
 	 * Metodo que sirve para contabilizar el tiempo.
 	 * 
 	 * Funciona aumentan los impulsos, cuando estos llegan a 100 
-	 * se a�ade un segundo, y los impulsos vuelven a cero.
+	 * se añade un segundo, y los impulsos vuelven a cero.
 	 * 
-	 * Cuando los segundos llegan a 60 se a�ade un minuto 
+	 * Cuando los segundos llegan a 60 se añade un minuto 
 	 * y los segundos vuelven a 0.
 	 * 
-	 * Cuando los minutos llegan a 60 se a�ade una hora
+	 * Cuando los minutos llegan a 60 se añade una hora
 	 * y los minutos vuelven a 0.
 	 * 
 	 * Las horas no tienen limite

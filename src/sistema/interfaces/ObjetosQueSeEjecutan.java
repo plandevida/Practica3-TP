@@ -1,5 +1,10 @@
 package sistema.interfaces;
 
-public interface ObjetosQueSeEjecutan {
-	public boolean ejecutar();
+public abstract class ObjetosQueSeEjecutan extends Thread {
+	
+	private Boolean exit = false;
+	
+	public void exit(Boolean salir) {
+		exit = salir;
+	}
 }

@@ -2,7 +2,7 @@ package sistema.entidades.tiempo;
 
 import sistema.interfaces.ObjetosQueSeEjecutan;
 
-public class Contador implements ObjetosQueSeEjecutan {
+public class Contador extends ObjetosQueSeEjecutan {
 	//el numero de impulsos que lleva 
 	protected int impulsos;
 	
@@ -14,13 +14,12 @@ public class Contador implements ObjetosQueSeEjecutan {
 	 * 
 	 * 
 	 */
-	public boolean ejecutar() { 
+	public void run() {
 		nuevoImpulso();
-		
-		return true;
 	}
+	
 	/**
-	 * Método que a�ade un nuevo impulso al actual.
+	 * Método que añade un nuevo impulso al actual.
 	 * 
 	 * 
 	 */

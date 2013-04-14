@@ -63,10 +63,8 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	@Override
-	public boolean ejecutar() {
+	public void run() {
 		pedalear();
-		
-		return true;
 	}
 	
 	/**
@@ -106,7 +104,7 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	/**
 	 * Aumentar el piñón actual al mayor adyacente.
 	 * 
-	 * @return El piñon al que se ha cambiado.
+	 * @return El piñón al que se ha cambiado.
 	 */
 	public int aumentarPinhon() {
 		
@@ -118,7 +116,7 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	/**
 	 * Desminuir el piñón actual al menor adyacente.
 	 * 
-	 * @return El piñon al que se ha cambiado.
+	 * @return El piñón al que se ha cambiado.
 	 */
 	public int disminuirPinhon() {
 		
