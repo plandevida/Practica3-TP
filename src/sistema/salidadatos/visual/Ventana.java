@@ -1,8 +1,8 @@
 package sistema.salidadatos.visual;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
 
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.salidadatos.InterfaceSalidaDatos;
@@ -21,18 +22,10 @@ import sistema.salidadatos.InterfaceSalidaDatos;
 public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	
 	private static final long serialVersionUID = 1L;
-	
-	private JTextArea textcicli1;
-	private JTextArea textcicli2;
-	private JTextArea textcicli3;
-	private JTextArea textcicli4;
-	private JPanel panel1;
-	private JPanel panel2;
-	private JPanel panel3;
-	private JPanel panel4;
 
 	// Lista de objetos que se van a mostrar
 	private List<ObjetosConSalidaDeDatos> registroobjetossalidadatos;
+	JPanel panelCiclistas;
 	
 	public Ventana(){
 		
@@ -43,46 +36,45 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	
 	private void init() {
 		
-		setTitle("principal");
-		setBounds(new Rectangle(500,500));
+		setTitle("Principal");
+//		setBounds(new Rectangle(500,300));
+		setPreferredSize(new Dimension(500, 300));
 		
-		setLayout(new BorderLayout(10, 10));
+		JPanel panelPrincipal = new JPanel(new BorderLayout());
 		
-		JPanel panelCiclistas = new JPanel();
+		panelCiclistas = new JPanel();
 		
-		textcicli1 = new JTextArea("cicli1");
+		JTextArea textcicli1 = new JTextArea("cicli1");
+		textcicli1.setPreferredSize(new Dimension(100, 200));
 		textcicli1.setEditable(false);
+		textcicli1.setBorder(new TitledBorder(textcicli1.getText()));
 		
-		textcicli2 = new JTextArea("cicli2");
+		JTextArea textcicli2 = new JTextArea("cicli2");
 		textcicli2.setEditable(false);
+		textcicli2.setBorder(new TitledBorder(textcicli2.getText()));
 		
-		textcicli3 = new JTextArea("cicli3");
+		JTextArea textcicli3 = new JTextArea("cicli3");
 		textcicli3.setEditable(false);
+		textcicli3.setBorder(new TitledBorder(textcicli3.getText()));
 		
-		textcicli4 = new JTextArea("cicli4");
+		JTextArea textcicli4 = new JTextArea("cicli4");
 		textcicli4.setEditable(false);
-		
-		panel1 = new JPanel();
-		panel2 = new JPanel();
-		panel3 = new JPanel();
-		panel4 = new JPanel();
+		textcicli4.setBorder(new TitledBorder(textcicli4.getText()));
 		
 		panelCiclistas.setLayout(new GridLayout());
 		
-		panel1.add(textcicli1);
-		panel2.add(textcicli2);
-		panel3.add(textcicli3);
-		panel4.add(textcicli4);
+		panelCiclistas.add(textcicli1);
+		panelCiclistas.add(textcicli2);
+		panelCiclistas.add(textcicli3);
+		panelCiclistas.add(textcicli4);
 		
-		panelCiclistas.add(panel1);
-		panelCiclistas.add(panel2);
-		panelCiclistas.add(panel3);
-		panelCiclistas.add(panel4);
+		panelPrincipal.add(panelCiclistas, BorderLayout.CENTER);
+		panelPrincipal.add(crearBotones(), BorderLayout.SOUTH);
 		
-		getContentPane().add(panelCiclistas, BorderLayout.CENTER);
-		getContentPane().add(crearBotones(), BorderLayout.SOUTH);
+		setContentPane(panelPrincipal);
 
 		setVisible(true);
+		pack();
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	
@@ -91,28 +83,29 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	private JPanel crearBotones() {
 		JPanel panel = new JPanel();
 		
-		JButton botonAñadir = new JButton();
+		JButton botonAñadir = new JButton("Añadir");
 		
 		botonAñadir.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				añadirTextArea();
+				añadirTextAreas();
 			}
 		});
+		
+		panel.add(botonAñadir);
 		
 		return panel;
 	}
 	
-	public void añadirTextArea() {
+	public void añadirTextAreas() {
 		
-		JTextArea textcicli = new JTextArea("cicli" + registroobjetossalidadatos.size()+1);
+		JTextArea textcicli = new JTextArea("nueva");
+		textcicli.setPreferredSize(new Dimension(100, 200));
 		textcicli.setEditable(false);
+		textcicli.setBorder(new TitledBorder(textcicli.getText()));
 		
-		JPanel panel = new JPanel();
-		
-		panel.add(textcicli1);
-		
-		getContentPane().add(panel);
+		panelCiclistas.add(textcicli);
+		panelCiclistas.validate();
 	}
 
 	@Override
@@ -134,53 +127,52 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 		if (registroobjetossalidadatos != null) {
 
 			for (ObjetosConSalidaDeDatos objetoamostrar : registroobjetossalidadatos) {
-
-				int numerodetokens = objetoamostrar.mostrarDatos().countTokens();
+				
 				StringTokenizer mensaje = objetoamostrar.mostrarDatos();
 
-				StringBuilder formato = new StringBuilder();
+				String formato = mensaje.nextToken();
 				
-				switch (numerodetokens) {
+				StringBuilder datos = new StringBuilder();
+				
+				switch (formato) {
 
 				// Caso para el formato de la bicicleta
-				case 1:
-					formato.append("-- Bicicleta --")
+				case "#bicicleta#":
+					datos.append("-- Bicicleta --")
 						.append("velocidad: ")
-						.append(mensaje.nextElement());
+						.append(mensaje.nextToken());
 					
 					break;
 
 				// Caso para el formato del ciclista
-				case 3:
-					formato.append("-- Ciclista --")
+				case "#ciclista#":
+					datos.append("-- Ciclista --")
 					.append("nombre: ")
-					.append(mensaje.nextElement())
+					.append(mensaje.nextToken())
 					.append("peso: ")
-					.append(mensaje.nextElement())
+					.append(mensaje.nextToken())
 					.append("cadencia: ")
-					.append(mensaje.nextElement());
+					.append(mensaje.nextToken());
 					
 					break;
 
 				// Caso para el formato reloj
-				case 4:
+				case "#reloj#":
 					System.out.println("-- Reloj --");
 
-					formato.append((String) mensaje.nextElement()).append("h ")
-							.append((String) mensaje.nextElement())
+					datos.append((String) mensaje.nextToken()).append("h ")
+							.append((String) mensaje.nextToken())
 							.append("m ")
-							.append((String) mensaje.nextElement())
+							.append((String) mensaje.nextToken())
 							.append("s ")
-							.append((String) mensaje.nextElement())
+							.append((String) mensaje.nextToken())
 							.append(" impulsos");
-
-					System.out.println(formato.toString());
 					
 					break;
 
 				default:
 					while (mensaje.hasMoreElements())
-						System.out.println(mensaje.nextElement());
+						System.out.println(mensaje.nextToken());
 					
 					break;
 				}

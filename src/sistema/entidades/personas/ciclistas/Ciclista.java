@@ -73,11 +73,12 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	public StringTokenizer mostrarDatos() {
-		StringBuilder mensaje = new StringBuilder(getNombre());
-		mensaje.append(",");
-		mensaje.append(getPeso());
-		mensaje.append(",");
-		mensaje.append(getCadencia());
+		StringBuilder mensaje = new StringBuilder("#ciclista#");
+		mensaje.append(getNombre())
+			.append(",")
+			.append(getPeso())
+			.append(",")
+			.append(getCadencia());
 
 		StringTokenizer stringTokenizer = new StringTokenizer(mensaje.toString(), ",");
 
