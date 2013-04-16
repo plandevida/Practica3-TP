@@ -95,7 +95,7 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	public StringTokenizer mostrarDatos() {
-		StringBuilder mensaje = new StringBuilder();
+		StringBuilder mensaje = new StringBuilder("#bicicleta#,");
 		mensaje.append(getVelocidad());
 		
 		return new StringTokenizer(mensaje.toString(), ",");

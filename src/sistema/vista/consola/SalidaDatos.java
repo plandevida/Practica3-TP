@@ -1,12 +1,11 @@
-package sistema.salidadatos.consola;
+package sistema.vista.consola;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.StringTokenizer;
 
 import sistema.interfaces.ObjetosConSalidaDeDatos;
-import sistema.salidadatos.InterfaceSalidaDatos;
+import sistema.vista.InterfaceSalidaDatos;
 
 /**
  * Clase que muestra la información formateada de cada
@@ -29,6 +28,10 @@ public class SalidaDatos implements InterfaceSalidaDatos{
 		registroobjetossalidadatos = new ArrayList<ObjetosConSalidaDeDatos>();
 	}
 	
+	public SalidaDatos(List<ObjetosConSalidaDeDatos> listaamostrar) {
+		registroobjetossalidadatos = listaamostrar;
+	}
+	
 	/**
 	 * Registra un objeto para ser mostrada su salida.
 	 * 
@@ -44,7 +47,7 @@ public class SalidaDatos implements InterfaceSalidaDatos{
 	 * 
 	 * @param listadeobjetosconsalidadatos
 	 */
-	public void registrarObjetoConSalidaDatos(Collection<ObjetosConSalidaDeDatos> listadeobjetosconsalidadatos) {
+	public void registrarObjetoConSalidaDatos(ArrayList<ObjetosConSalidaDeDatos> listadeobjetosconsalidadatos) {
 		
 		for (ObjetosConSalidaDeDatos objetoaregistrar : listadeobjetosconsalidadatos) {
 			registroobjetossalidadatos.add(objetoaregistrar);
@@ -59,21 +62,22 @@ public class SalidaDatos implements InterfaceSalidaDatos{
 		if (registroobjetossalidadatos != null) {
 
 			for (ObjetosConSalidaDeDatos objetoamostrar : registroobjetossalidadatos) {
-
-				int numerodetokens = objetoamostrar.mostrarDatos().countTokens();
+				
 				StringTokenizer mensaje = objetoamostrar.mostrarDatos();
 
-				switch (numerodetokens) {
+				String formato = mensaje.nextToken();
+
+				switch (formato) {
 
 				// Caso para el formato de la bicicleta
-				case 1:
+				case "#bicicleta#":
 					System.out.println("-- Bicicleta --");
 					System.out.println("velocidad: " + mensaje.nextElement());
 					
 					break;
 
 				// Caso para el formato del ciclista
-				case 3:
+				case "#ciclista#":
 					System.out.println("-- Ciclista --");
 					System.out.println("nombre: " + mensaje.nextElement());
 					System.out.println("peso: " + mensaje.nextElement());
@@ -82,10 +86,10 @@ public class SalidaDatos implements InterfaceSalidaDatos{
 					break;
 
 				// Caso para el formato reloj
-				case 4:
+				case "#reloj#":
 					System.out.println("-- Reloj --");
 
-					StringBuilder formato = new StringBuilder(
+					StringBuilder datos = new StringBuilder(
 							(String) mensaje.nextElement()).append("h ")
 							.append((String) mensaje.nextElement())
 							.append("m ")
@@ -94,7 +98,7 @@ public class SalidaDatos implements InterfaceSalidaDatos{
 							.append((String) mensaje.nextElement())
 							.append(" impulsos");
 
-					System.out.println(formato.toString());
+					System.out.println(datos.toString());
 					
 					break;
 

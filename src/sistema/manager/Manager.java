@@ -14,9 +14,10 @@ import sistema.entrada.ordenes.Dispatcher;
 import sistema.entrada.parseador.parser.ParseadorCarrera;
 import sistema.entrada.parseador.parser.ParseadorComandos;
 import sistema.factoresexternos.FactoresExternos;
+import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.interfaces.ObjetosQueSeEjecutan;
-import sistema.salidadatos.consola.SalidaDatos;
-import sistema.salidadatos.visual.Ventana;
+import sistema.vista.consola.SalidaDatos;
+import sistema.vista.visual.Ventana;
 
 /**
  * Clase principal que inicia la aplicación.
@@ -33,10 +34,11 @@ public class Manager {
 	
 	
 	private List<ObjetosQueSeEjecutan> listaejecutables;
+	private List<ObjetosConSalidaDeDatos> listasalidadatos;
 	private Map<Integer, TramoCiclista> carreteradecarreraciclsta;
 	
 	// Entidades del sistema.
-	private SalidaDatos salidadatos;
+//	private SalidaDatos salidadatos;
 	private List<Ciclista> ciclistas;
 	private Bicicleta bicicleta;
 	private Bicicleta bicicleta1;
@@ -84,7 +86,6 @@ public class Manager {
 	public void iniciar() {
 		
 		reloj = new Reloj();
-		ventana = new Ventana();
 		ciclistas = new ArrayList<Ciclista>();
 		factores = new ArrayList<FactoresExternos>();
 		
@@ -105,7 +106,18 @@ public class Manager {
 		ciclistas.add(new Ciclista("Juan", 4, 0.75, bicicleta3, reloj));
 		
 		listaejecutables = new ArrayList<ObjetosQueSeEjecutan>();
-		salidadatos = new SalidaDatos();
+		
+		listasalidadatos = new ArrayList<ObjetosConSalidaDeDatos>();
+		
+		listasalidadatos.add(reloj);
+		listasalidadatos.add(bicicleta);
+		listasalidadatos.add(bicicleta1);
+		listasalidadatos.add(bicicleta2);
+		listasalidadatos.add(bicicleta3);
+		
+//		salidadatos = new SalidaDatos(listasalidadatos);
+		
+		ventana = new Ventana(listasalidadatos);
 		
 		// Se registran los elementos ejecutables en una lista.
 		listaejecutables.add(reloj);
@@ -113,25 +125,13 @@ public class Manager {
 		// Se registran los elementos con salida de datos.
 		for (Ciclista ciclista : ciclistas) {
 			listaejecutables.add(ciclista);
-			salidadatos.registrarObjetoConSalidaDatos(ciclista);
+//			salidadatos.registrarObjetoConSalidaDatos(ciclista);
 		}
 		
 		//Se registran los factores externos
 		for (FactoresExternos factor : factores){
 			listaejecutables.add(factor);
 		}
-		
-		salidadatos.registrarObjetoConSalidaDatos(reloj);
-		salidadatos.registrarObjetoConSalidaDatos(bicicleta);
-		salidadatos.registrarObjetoConSalidaDatos(bicicleta1);
-		salidadatos.registrarObjetoConSalidaDatos(bicicleta2);
-		salidadatos.registrarObjetoConSalidaDatos(bicicleta3);
-		
-		ventana.registrarObjetoConSalidaDatos(reloj);
-		ventana.registrarObjetoConSalidaDatos(bicicleta);
-		ventana.registrarObjetoConSalidaDatos(bicicleta1);
-		ventana.registrarObjetoConSalidaDatos(bicicleta2);
-		ventana.registrarObjetoConSalidaDatos(bicicleta3);
 		
 		dispatcher = new Dispatcher();
 		parser = new ParseadorComandos(dispatcher, listaejecutables);
@@ -154,7 +154,7 @@ public class Manager {
 			parser.parse(lector.leerFichero());
 			parser.dispatch();
 			
-			salidadatos.mostrarDatos();
+//			salidadatos.mostrarDatos();
 		}
 	}
 	

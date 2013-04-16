@@ -73,7 +73,7 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	public StringTokenizer mostrarDatos() {
-		StringBuilder mensaje = new StringBuilder("#ciclista#");
+		StringBuilder mensaje = new StringBuilder("#ciclista#,");
 		mensaje.append(getNombre())
 			.append(",")
 			.append(getPeso())

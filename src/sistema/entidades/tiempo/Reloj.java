@@ -60,7 +60,7 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	public StringTokenizer mostrarDatos() {
-		StringBuilder mensaje = new StringBuilder();
+		StringBuilder mensaje = new StringBuilder("#reloj#,");
 		mensaje.append(getHoras());
 		mensaje.append(",");
 		mensaje.append(getMinutos());

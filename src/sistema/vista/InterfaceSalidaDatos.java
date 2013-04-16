@@ -1,6 +1,6 @@
-package sistema.salidadatos;
+package sistema.vista;
 
-import java.util.Collection;
+import java.util.ArrayList;
 
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 
@@ -18,7 +18,7 @@ public interface InterfaceSalidaDatos {
 	 * 
 	 * @param listadeobjetosconsalidadatos
 	 */
-	public void registrarObjetoConSalidaDatos(Collection<ObjetosConSalidaDeDatos> listadeobjetosconsalidadatos);
+	public void registrarObjetoConSalidaDatos(ArrayList<ObjetosConSalidaDeDatos> listadeobjetosconsalidadatos);
 	
 	/**
 	 * Muestra la salida de datos personalizada para cada tipo de elemento.
