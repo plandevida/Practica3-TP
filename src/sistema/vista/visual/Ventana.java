@@ -3,18 +3,22 @@ package sistema.vista.visual;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.text.BadLocationException;
 
+import sistema.entrada.parseador.parser.ParseadorComandos;
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.vista.InterfaceSalidaDatos;
 
@@ -26,15 +30,19 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	private List<ObjetosConSalidaDeDatos> registroobjetossalidadatos;
 	private List<JTextArea> areasCreadas;
 	
+	private ParseadorComandos parsercomandos;
+	
 	private JPanel panelCiclistas;
 	
-	public Ventana() {
+	public Ventana(ParseadorComandos parser) {
+		parsercomandos = parser;
 		
 		Init();
 	}
 	
-	public Ventana( List<ObjetosConSalidaDeDatos> objetosAMostrar) {
+	public Ventana( List<ObjetosConSalidaDeDatos> objetosAMostrar, ParseadorComandos parser) {
 		registroobjetossalidadatos = objetosAMostrar;
+		parsercomandos = parser;
 		
 		Init();
 	}
@@ -47,33 +55,10 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 		
 		panelCiclistas = new JPanel();
-		
-//		JTextArea textcicli1 = new JTextArea("cicli1");
-//		textcicli1.setPreferredSize(new Dimension(100, 200));
-//		textcicli1.setEditable(false);
-//		textcicli1.setBorder(new TitledBorder(textcicli1.getText()));
-//		
-//		JTextArea textcicli2 = new JTextArea("cicli2");
-//		textcicli2.setEditable(false);
-//		textcicli2.setBorder(new TitledBorder(textcicli2.getText()));
-//		
-//		JTextArea textcicli3 = new JTextArea("cicli3");
-//		textcicli3.setEditable(false);
-//		textcicli3.setBorder(new TitledBorder(textcicli3.getText()));
-//		
-//		JTextArea textcicli4 = new JTextArea("cicli4");
-//		textcicli4.setEditable(false);
-//		textcicli4.setBorder(new TitledBorder(textcicli4.getText()));
-		
 		panelCiclistas.setLayout(new GridLayout());
 		
-//		panelCiclistas.add(textcicli1);
-//		panelCiclistas.add(textcicli2);
-//		panelCiclistas.add(textcicli3);
-//		panelCiclistas.add(textcicli4);
-		
 		panelPrincipal.add(panelCiclistas, BorderLayout.CENTER);
-		panelPrincipal.add(crearBotones(), BorderLayout.SOUTH);
+		panelPrincipal.add(crearComandero(), BorderLayout.SOUTH);
 		
 		setContentPane(panelPrincipal);
 		
@@ -90,24 +75,53 @@ public class Ventana extends JFrame implements InterfaceSalidaDatos {
 	
 	}
 	
-	private JPanel crearBotones() {
+	private JPanel crearComandero() {
 		JPanel panel = new JPanel();
 		
-		JButton botonAñadir = new JButton("Añadir");
+		JLabel campocomandosetiqueta = new JLabel("Comandos: ");
 		
-		botonAñadir.addActionListener(new ActionListener() {
+		JTextField campocomandos = new JTextField();
+		campocomandos.setBounds(new Rectangle(120, 50));
+		
+		campocomandos.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
-				añadirTextAreas("nueva");
+			public void removeUpdate(DocumentEvent e) {
+				try {
+					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				try {
+					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				try {
+					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
+				} catch (BadLocationException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		
-		panel.add(botonAñadir);
+		panel.add(campocomandosetiqueta);
+		panel.add(campocomandos);
 		
 		return panel;
 	}
 	
-	public void añadirTextAreas(String nombre) {
+	private void añadirTextAreas(String nombre) {
 		
 		if (areasCreadas == null) {
 			areasCreadas = new ArrayList<JTextArea>();

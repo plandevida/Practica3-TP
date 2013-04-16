@@ -16,7 +16,6 @@ import sistema.entrada.parseador.parser.ParseadorComandos;
 import sistema.factoresexternos.FactoresExternos;
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.interfaces.ObjetosQueSeEjecutan;
-import sistema.vista.consola.SalidaDatos;
 import sistema.vista.visual.Ventana;
 
 /**
@@ -117,7 +116,7 @@ public class Manager {
 		
 //		salidadatos = new SalidaDatos(listasalidadatos);
 		
-		ventana = new Ventana(listasalidadatos);
+		ventana = new Ventana(listasalidadatos, parser);
 		
 		// Se registran los elementos ejecutables en una lista.
 		listaejecutables.add(reloj);
