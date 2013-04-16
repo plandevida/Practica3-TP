@@ -76,8 +76,6 @@ public class Manager {
 		ParseadorCarrera parseadorcarrera = new ParseadorCarrera(carreteradecarreraciclsta);
 		
 		parseadorcarrera.parse(datos);
-		
-	
 	}
 	
 	/**
@@ -128,6 +126,12 @@ public class Manager {
 		salidadatos.registrarObjetoConSalidaDatos(bicicleta1);
 		salidadatos.registrarObjetoConSalidaDatos(bicicleta2);
 		salidadatos.registrarObjetoConSalidaDatos(bicicleta3);
+		
+		ventana.registrarObjetoConSalidaDatos(reloj);
+		ventana.registrarObjetoConSalidaDatos(bicicleta);
+		ventana.registrarObjetoConSalidaDatos(bicicleta1);
+		ventana.registrarObjetoConSalidaDatos(bicicleta2);
+		ventana.registrarObjetoConSalidaDatos(bicicleta3);
 		
 		dispatcher = new Dispatcher();
 		parser = new ParseadorComandos(dispatcher, listaejecutables);
