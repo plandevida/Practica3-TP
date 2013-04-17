@@ -16,6 +16,7 @@ import sistema.entrada.parseador.parser.ParseadorComandos;
 import sistema.factoresexternos.FactoresExternos;
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.interfaces.ObjetosQueSeEjecutan;
+import sistema.vista.consola.SalidaDatos;
 import sistema.vista.visual.Ventana;
 
 /**
@@ -37,7 +38,7 @@ public class Manager {
 	private Map<Integer, TramoCiclista> carreteradecarreraciclsta;
 	
 	// Entidades del sistema.
-//	private SalidaDatos salidadatos;
+	private SalidaDatos salidadatos;
 	private List<Ciclista> ciclistas;
 	private Bicicleta bicicleta;
 	private Bicicleta bicicleta1;
@@ -114,7 +115,7 @@ public class Manager {
 		listasalidadatos.add(bicicleta2);
 		listasalidadatos.add(bicicleta3);
 		
-//		salidadatos = new SalidaDatos(listasalidadatos);
+		salidadatos = new SalidaDatos(listasalidadatos);
 		
 		ventana = new Ventana(listasalidadatos, parser);
 		
@@ -124,7 +125,7 @@ public class Manager {
 		// Se registran los elementos con salida de datos.
 		for (Ciclista ciclista : ciclistas) {
 			listaejecutables.add(ciclista);
-//			salidadatos.registrarObjetoConSalidaDatos(ciclista);
+			salidadatos.registrarObjetoConSalidaDatos(ciclista);
 		}
 		
 		//Se registran los factores externos
@@ -153,7 +154,7 @@ public class Manager {
 			parser.parse(lector.leerFichero());
 			parser.dispatch();
 			
-//			salidadatos.mostrarDatos();
+			salidadatos.mostrarDatos();
 		}
 	}
 	
