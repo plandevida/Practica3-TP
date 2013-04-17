@@ -2,7 +2,7 @@ package sistema.entidades.personas;
 
 import sistema.interfaces.ObjetosQueSeEjecutan;
 
-public class Persona extends ObjetosQueSeEjecutan {
+public class Persona implements ObjetosQueSeEjecutan {
 	//nombre de la persona
 	private String nombre;
 	
@@ -70,5 +70,12 @@ public class Persona extends ObjetosQueSeEjecutan {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	protected boolean exit = false;
+	
+	@Override
+	public void salir(boolean salir) {
+		exit = salir;
 	}
 }

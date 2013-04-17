@@ -1,10 +1,8 @@
 package sistema.interfaces;
 
-public abstract class ObjetosQueSeEjecutan extends Thread {
+public interface ObjetosQueSeEjecutan extends Runnable {
+	@Override
+	public void run();
 	
-	private Boolean exit = false;
-	
-	public void exit(Boolean salir) {
-		exit = salir;
-	}
+	public void salir(boolean salir);
 }

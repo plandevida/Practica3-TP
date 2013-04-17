@@ -2,7 +2,7 @@ package sistema.entidades.tiempo;
 
 import sistema.interfaces.ObjetosQueSeEjecutan;
 
-public class Contador extends ObjetosQueSeEjecutan {
+public class Contador implements ObjetosQueSeEjecutan {
 	//el numero de impulsos que lleva 
 	protected int impulsos;
 	
@@ -11,11 +11,22 @@ public class Contador extends ObjetosQueSeEjecutan {
 	}
 	/**
 	 * Metodo que ejecuta.
-	 * 
-	 * 
 	 */
 	public void run() {
-		nuevoImpulso();
+		while (!exit) {
+			nuevoImpulso();
+		}
+	}
+	
+	// Variable que controla la salida del hilo.
+	private boolean exit = false;
+	
+	/**
+	 * Método que cambia el estado de salida del hilo.
+	 * @param salir
+	 */
+	public void salir(boolean salir) {
+		exit = salir;
 	}
 	
 	/**

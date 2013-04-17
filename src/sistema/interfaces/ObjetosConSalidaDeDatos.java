@@ -10,4 +10,10 @@ public interface ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	public StringTokenizer mostrarDatos();
+	
+	/**
+	 * Retorna un identificador para ubicar sus datos en la vista.
+	 * @return El identificador.
+	 */
+	public String getIdentificadorSalidaDatos();
 }

@@ -11,7 +11,7 @@ import sistema.interfaces.ObjetosQueSeEjecutan;
  * @author Daniel Serrano Torres
  * @author Alvaro Quesada Pimentel
  */
-public class FactoresExternos extends ObjetosQueSeEjecutan {
+public class FactoresExternos implements ObjetosQueSeEjecutan {
 	
 	private Bicicleta bici;
 	
@@ -105,6 +105,14 @@ public class FactoresExternos extends ObjetosQueSeEjecutan {
 	public void run() {
 		
 		setVelocidadModificada();
+	}
+
+	@SuppressWarnings("unused")
+	private boolean exit = false;
+	
+	@Override
+	public void salir(boolean salir) {
+		exit = salir;
 	}
 }
 

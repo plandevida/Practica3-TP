@@ -5,11 +5,11 @@ import java.util.StringTokenizer;
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 
 
-public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
-	// Los segundos que lleva, es una unidad mas pequeña q los minutos
+public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
+	// Los segundos que lleva, es una unidad mas pequeña que los minutos
 	private int segundos;
 	
-	// Los minutos que lleva, es una unidad mas pequeña q las horas
+	// Los minutos que lleva, es una unidad mas pequeña que las horas
 	private int minutos;
 	
 	// Las horas que lleva, es la unidad mas grande del programa
@@ -32,7 +32,7 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
 	 * Cuando los minutos llegan a 60 se añade una hora
 	 * y los minutos vuelven a 0.
 	 * 
-	 * Las horas no tienen limite
+	 * Las horas no tienen limite, como la vida misma.
 	 */
 	@Override
 	public void nuevoImpulso() {
@@ -97,6 +97,11 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos{
 	public int getHoras() {
 		return horas;
 	}
+	
+	public String getIdentificadorSalidaDatos() {
+		return "reloj";
+	}
+	
 	/**
 	 * Main.
 	 * 

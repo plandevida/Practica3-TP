@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.SwingUtilities;
+
 import sistema.entidades.carretera.tramocarreraciclista.TramoCiclista;
 import sistema.entidades.personas.ciclistas.Ciclista;
 import sistema.entidades.tiempo.Reloj;
@@ -16,6 +18,7 @@ import sistema.entrada.parseador.parser.ParseadorComandos;
 import sistema.factoresexternos.FactoresExternos;
 import sistema.interfaces.ObjetosConSalidaDeDatos;
 import sistema.interfaces.ObjetosQueSeEjecutan;
+import sistema.vista.visual.FormateadorDatosVista;
 import sistema.vista.visual.Ventana;
 
 /**
@@ -31,28 +34,26 @@ public class Manager {
 	public static final String DEFAULT_CONFIG_PATH = "resources/configuracion/carrera";
 	public static final String DEFAULT_COMANDOS_PATH = "resources/instrucciones/comandos";
 	
-	
 	private List<ObjetosQueSeEjecutan> listaejecutables;
 	private List<ObjetosConSalidaDeDatos> listasalidadatos;
 	private Map<Integer, TramoCiclista> carreteradecarreraciclsta;
 	
 	// Entidades del sistema.
-//	private SalidaDatos salidadatos;
 	private List<Ciclista> ciclistas;
 	private Bicicleta bicicleta;
 	private Bicicleta bicicleta1;
 	private Bicicleta bicicleta2;
 	private Bicicleta bicicleta3;
-	//
+	
 	private List<FactoresExternos> factores;
 	private Ventana ventana;
-	//
+	private FormateadorDatosVista formateador;
+	
 	private Reloj reloj;
 	
 	// Elemetos del sistema
 	private Dispatcher dispatcher;
 	private ParseadorComandos parser;
-	private Lector lector;
 	
 	/**
 	 * Carga la carretera de la carrera ciclista.
@@ -84,9 +85,22 @@ public class Manager {
 	 */
 	public void iniciar() {
 		
+		listaejecutables = new ArrayList<ObjetosQueSeEjecutan>();
+		listasalidadatos = new ArrayList<ObjetosConSalidaDeDatos>();
+		
 		reloj = new Reloj();
 		ciclistas = new ArrayList<Ciclista>();
 		factores = new ArrayList<FactoresExternos>();
+		
+		SwingUtilities.invokeLater(new Runnable() {
+			@Override
+			public void run() {
+				ventana = new Ventana(parser);
+			}
+		});
+		
+		while (ventana == null) {System.out.println("esperando a la ventana");}
+		formateador = new FormateadorDatosVista(listasalidadatos, ventana);
 		
 		// Bicicletas para los ciclistas.
 		bicicleta = new Bicicleta();
@@ -104,19 +118,11 @@ public class Manager {
 		ciclistas.add(new Ciclista("Ana", 3, 1.0, bicicleta2, reloj));
 		ciclistas.add(new Ciclista("Juan", 4, 0.75, bicicleta3, reloj));
 		
-		listaejecutables = new ArrayList<ObjetosQueSeEjecutan>();
-		
-		listasalidadatos = new ArrayList<ObjetosConSalidaDeDatos>();
-		
 		listasalidadatos.add(reloj);
 		listasalidadatos.add(bicicleta);
 		listasalidadatos.add(bicicleta1);
 		listasalidadatos.add(bicicleta2);
 		listasalidadatos.add(bicicleta3);
-		
-//		salidadatos = new SalidaDatos(listasalidadatos);
-		
-		ventana = new Ventana(listasalidadatos, parser);
 		
 		// Se registran los elementos ejecutables en una lista.
 		listaejecutables.add(reloj);
@@ -124,7 +130,6 @@ public class Manager {
 		// Se registran los elementos con salida de datos.
 		for (Ciclista ciclista : ciclistas) {
 			listaejecutables.add(ciclista);
-//			salidadatos.registrarObjetoConSalidaDatos(ciclista);
 		}
 		
 		//Se registran los factores externos
@@ -132,10 +137,10 @@ public class Manager {
 			listaejecutables.add(factor);
 		}
 		
+		listaejecutables.add(formateador);
+		
 		dispatcher = new Dispatcher();
 		parser = new ParseadorComandos(dispatcher, listaejecutables);
-		
-		lector = new Lector(DEFAULT_COMANDOS_PATH, false);
 	}
 	
 	/**
@@ -144,16 +149,10 @@ public class Manager {
 	public void ejecutar() {
 		
 		for (ObjetosQueSeEjecutan objetoejecutable : listaejecutables) {
-			objetoejecutable.start();
+			new Thread(objetoejecutable).start();
 		}
 		
 		while ( reloj.getHoras() < 2 ) {
-			
-			parser.parse(lector.leerTeclado());
-			parser.parse(lector.leerFichero());
-			parser.dispatch();
-			
-//			salidadatos.mostrarDatos();
 		}
 	}
 	
@@ -161,7 +160,9 @@ public class Manager {
 	 * Finaliza el contexto de la aplicación.
 	 */
 	public void finalizar() {
-		lector.finalizarLecturas();
+		for (ObjetosQueSeEjecutan objetoaparar : listaejecutables) {
+			objetoaparar.salir(true);
+		}
 	}
 	
 	/**

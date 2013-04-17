@@ -54,6 +54,8 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 		bicicletamontada = bicicletaamontar;
 		reloj = relojCiclista;
 		numeromallot = nummallot;
+		
+		bicicletamontada.setId(numeromallot);
 	}
 	
 	/**
@@ -64,7 +66,10 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 */
 	@Override
 	public void run() {
-		pedalear();
+		
+		while (!exit) {
+			pedalear();
+		}
 	}
 	
 	/**
@@ -211,5 +216,9 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 */
 	public int getNumeromallot() {
 		return numeromallot;
+	}
+	
+	public String getIdentificadorSalidaDatos() {
+		return numeromallot + " " + getNombre(); 
 	}
 }

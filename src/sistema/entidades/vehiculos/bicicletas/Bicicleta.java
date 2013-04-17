@@ -228,6 +228,16 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 	public double getRadiorueda() {
 		return radiorueda;
 	}
+	
+	private int id;
+	
+	public void setId(int numerocorredor) {
+		id = numerocorredor;
+	}
+	
+	public String getIdentificadorSalidaDatos() {
+		return "bicicleta " + id;
+	}
 
 //	 private enum Pinhones {
 //		 UNO(10), //0
