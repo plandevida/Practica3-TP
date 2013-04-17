@@ -23,6 +23,7 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * El reloj del ciclista.
 	 */
 	private Reloj reloj;
+	private int segundos;
 	
 	/**
 	 * La candencia de la pedalada del ciclista.
@@ -54,6 +55,7 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 		bicicletamontada = bicicletaamontar;
 		reloj = relojCiclista;
 		numeromallot = nummallot;
+		segundos=-1;
 	}
 	
 	/**
@@ -64,7 +66,10 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 */
 	@Override
 	public void run() {
-		pedalear();
+		while ( !exit )
+		{
+			pedalear();
+		}
 	}
 	
 	/**
@@ -89,7 +94,14 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * Metodo que da pedaladas a la bicicleta
 	 */
 	public void pedalear() {
-		bicicletamontada.darPedalada(cadencia);
+		
+		if (reloj.getSegundos()!=segundos)
+		{
+			bicicletamontada.darPedalada(cadencia);
+	
+			segundos = reloj.getSegundos();
+		//	System.out.println(reloj.getSegundos());
+		}
 	}
 	
 	/**

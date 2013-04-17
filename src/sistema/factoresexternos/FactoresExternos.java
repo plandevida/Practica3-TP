@@ -103,8 +103,10 @@ public class FactoresExternos extends ObjetosQueSeEjecutan {
 
 	@Override
 	public void run() {
-		
-		setVelocidadModificada();
+		while ( !exit )
+		{
+			setVelocidadModificada();
+		}
 	}
 }
 

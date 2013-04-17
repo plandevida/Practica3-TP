@@ -15,7 +15,10 @@ public class Contador extends ObjetosQueSeEjecutan {
 	 * 
 	 */
 	public void run() {
-		nuevoImpulso();
+		while ( !exit )
+		{
+			nuevoImpulso();
+		}
 	}
 	
 	/**
