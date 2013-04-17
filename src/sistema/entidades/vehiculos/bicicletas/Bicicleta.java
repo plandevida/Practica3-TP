@@ -43,7 +43,7 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 		radiorueda = 0.2d;
 		
 		pendiente = 1;
-		viento = 1;
+		viento = 0;
 	}
 
 	/**
