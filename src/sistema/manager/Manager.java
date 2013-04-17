@@ -152,8 +152,7 @@ public class Manager {
 			new Thread(objetoejecutable).start();
 		}
 		
-		while ( reloj.getHoras() < 2 ) {
-		}
+		while ( reloj.getHoras() < 2 ) {}
 	}
 	
 	/**

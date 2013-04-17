@@ -27,6 +27,7 @@ public class Vehiculo {
 	 * @param incrementovelocidad Valor a aumentar la velocidad de la bicicleta.
 	 */
 	public void setVelocidadIncremento(double incrementovelocidad) {
+		
 		velocidadactual = incrementovelocidad;
 	}
 	

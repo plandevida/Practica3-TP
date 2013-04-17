@@ -15,6 +15,9 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 	
 	private Bicicleta bici;
 	
+	private double pendiente;
+	private double viento;
+	
 	//Mapa de la carretera
 	private Map<Integer, TramoCiclista> carreteradecarreraciclista;
 	
@@ -91,20 +94,21 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 	 * Modifica la velocidad de la bicicleta dependiendo de los factores externos de la carretera
 	 * 
 	 */
-	private void setVelocidadModificada() {
+	private void setVientoPendienteModificada() {
 
-		double velocidad = bici.getVelocidad() * pendienteTramoActual();
+		bici.setPendiente(pendienteTramoActual()) ;
 		
-		velocidad = velocidad + velocidad * vientoTramoActual();
+		bici.setViento(vientoTramoActual());
 		
-		bici.setVelocidadIncremento(velocidad);
 	}
 
 
 	@Override
 	public void run() {
-		
-		setVelocidadModificada();
+		while ( !exit )
+		{
+			setVientoPendienteModificada();
+		}
 	}
 
 	@SuppressWarnings("unused")
