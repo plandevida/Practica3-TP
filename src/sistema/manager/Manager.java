@@ -1,6 +1,9 @@
 package sistema.manager;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,33 +30,31 @@ import sistema.vista.visual.Ventana;
 public class Manager {
 	
 	// Contexto de los ficheros del sistema.
-	public static final String COMANDOS_FOLDER_PATH = "resources/instrucciones/";
 	public static final String CONFIG_FOLDER_PATH = "resources/configuracion/";
 	public static final String DEFAULT_CONFIG_PATH = "resources/configuracion/carrera";
-	public static final String DEFAULT_COMANDOS_PATH = "resources/instrucciones/comandos";
 	
+	// Listas con los elemenos del contexto del sistema
 	private List<ObjetosQueSeEjecutan> listaejecutables;
 	private List<ObjetosConSalidaDeDatos> listasalidadatos;
 	private Map<Integer, TramoCiclista> carreteradecarreraciclsta;
+	private List<Ciclista> ciclistas;
+	private List<Bicicleta> bicicletas;
 	
 	// Entidades del sistema.
-	private List<Ciclista> ciclistas;
-	
 	private Bicicleta bicicleta0;
 	private Bicicleta bicicleta1;
 	private Bicicleta bicicleta2;
 	private Bicicleta bicicleta3;
 	
-	private List<Bicicleta> bicicletas;
-	
-	private Ventana ventana;
-	private FormateadorDatosVista formateador;
-	
 	private FactoresExternos factoresexternos;
 	
 	private Reloj reloj;
 	
-	// Elemetos del sistema
+	// Vistas del sistema.
+	private Ventana ventana;
+	private FormateadorDatosVista formateador;
+	
+	// Subsitemas del sistema.
 	private Dispatcher dispatcher;
 	private ParseadorComandos parser;
 	
@@ -120,6 +121,7 @@ public class Manager {
 		ciclistas.add(new Ciclista("Ana", 3, 1.0, bicicleta2, reloj));
 		ciclistas.add(new Ciclista("Juan", 4, 0.75, bicicleta3, reloj));
 		
+		// Se registran los elementos con salida de datos en una lista.
 		listasalidadatos.add(reloj);
 		listasalidadatos.add(bicicleta0);
 		listasalidadatos.add(bicicleta1);
@@ -129,7 +131,6 @@ public class Manager {
 		// Se registran los elementos ejecutables en una lista.
 		listaejecutables.add(reloj);
 		
-		// Se registran los elementos con salida de datos.
 		for (Ciclista ciclista : ciclistas) {
 			listaejecutables.add(ciclista);
 		}

@@ -14,25 +14,20 @@ import sistema.interfaces.ObjetosConSalidaDeDatos;
  * @author Alvaro Quesada Pimentel
  */
 public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
-	/**
-	 * La bicicleta que va a montar.
-	 */
+	
+	// La bicicleta que va a montar.
 	private Bicicleta bicicletamontada;
 	
-	/**
-	 * El reloj del ciclista.
-	 */
+	// El reloj del ciclista.
 	private Reloj reloj;
+	
+	// El tiempo desde que dió la última pedalada.
 	private int segundos;
 	
-	/**
-	 * La candencia de la pedalada del ciclista.
-	 */
+	// La candencia de la pedalada del ciclista.
 	private double cadencia;
 	
-	/**
-	 * Número único del ciclista en la carrera
-	 */
+	// Número único del ciclista en la carrera
 	private int numeromallot;
 	
 	/**
@@ -59,6 +54,10 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 		bicicletamontada.setId(numeromallot);
 	}
 	
+	/**
+	 * Método que contiene las acciones comprendidas
+	 * por el iclista.
+	 */
 	@Override
 	public void ejecuta() {
 		pedalear();
@@ -216,6 +215,11 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 		return numeromallot;
 	}
 	
+	/**
+	 * Método que devuelve el identificador del ciclista.
+	 * 
+	 * @return Identificador único.
+	 */
 	public String getIdentificadorSalidaDatos() {
 		return numeromallot + " " + getNombre(); 
 	}

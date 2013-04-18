@@ -38,7 +38,9 @@ public class Ventana extends JFrame {
 	
 	private ParseadorComandos parsercomandos;
 	
-	private JPanel panelCiclistas;
+	private JPanel panelciclistasylog;
+	private JPanel panelciclistas;
+	private JPanel panellog;
 	private JTextField camporeloj;
 	
 	JTextField campocomandos;
@@ -56,16 +58,22 @@ public class Ventana extends JFrame {
 	private void Init() {
 		
 		setTitle("Carrera ciclista");
-		setPreferredSize(new Dimension(700, 300));
+		setPreferredSize(new Dimension(700, 500));
 		
 		JPanel panelPrincipal = new JPanel(new BorderLayout());
 		
-		panelCiclistas = new JPanel();
-		panelCiclistas.setLayout(new GridLayout(0, 2, 10, 10));
-		panelCiclistas.setBackground(Color.WHITE);
+		panelciclistasylog = new JPanel();
+		panelciclistasylog.setLayout(new GridLayout(2, 1, 10, 10));
+		
+		panelciclistas = new JPanel();
+		panelciclistas.setLayout(new GridLayout(0, 2, 10, 10));
+		panelciclistas.setBackground(Color.WHITE);
+		
+		panelciclistasylog.add(panelciclistas);
+		panelciclistasylog.add(crearLogeador());
 		
 		panelPrincipal.add(crearRelojero(), BorderLayout.NORTH);
-		panelPrincipal.add(panelCiclistas, BorderLayout.CENTER);
+		panelPrincipal.add(panelciclistasylog, BorderLayout.CENTER);
 		panelPrincipal.add(crearComandero(), BorderLayout.SOUTH);
 		
 		setContentPane(panelPrincipal);
@@ -74,8 +82,30 @@ public class Ventana extends JFrame {
 		pack();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setAlwaysOnTop(true);
 	}
 	
+	/**
+	 * Crea la caja de texto para el registro del sistema.
+	 * @return
+	 */
+	public JPanel crearLogeador() {
+		JPanel panel = new JPanel();
+		
+		JTextArea arealog = new JTextArea();
+		arealog.setBorder(new TitledBorder("Log"));
+		
+		panel.add(arealog);
+		
+		pack();
+		
+		return panel;
+	}
+	
+	/**
+	 * crea la caja de texto para introducir comandos al sistema.
+	 * @return
+	 */
 	private JPanel crearRelojero() {
 		JPanel panel = new JPanel();
 		
@@ -93,13 +123,13 @@ public class Ventana extends JFrame {
 		return panel;
 	}
 	
+	JPanel panel = new JPanel();
 	/**
 	 * Crea el campo de texto donde se insertan los comando al sistema.
 	 * 
 	 * @return Panel con el cuadro de texto.
 	 */
 	private JPanel crearComandero() {
-		JPanel panel = new JPanel();
 		panel.setPreferredSize(new Dimension(120, 60));
 		
 		JLabel campocomandosetiqueta = new JLabel("Comandos: ");
@@ -148,8 +178,8 @@ public class Ventana extends JFrame {
 		
 		componenetescreados.add(nuevaTextArea);
 		
-		panelCiclistas.add(nuevaTextArea);
-		panelCiclistas.validate();
+		panelciclistas.add(nuevaTextArea);
+		panelciclistas.validate();
 	}
 	
 	/**
