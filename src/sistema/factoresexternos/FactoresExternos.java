@@ -15,9 +15,6 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 	
 	private Bicicleta bici;
 	
-	private double pendiente;
-	private double viento;
-	
 	//Mapa de la carretera
 	private Map<Integer, TramoCiclista> carreteradecarreraciclista;
 	
@@ -104,19 +101,8 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 
 
 	@Override
-	public void run() {
-		while ( !exit )
-		{
-			setVientoPendienteModificada();
-		}
-	}
-
-	@SuppressWarnings("unused")
-	private boolean exit = false;
-	
-	@Override
-	public void salir(boolean salir) {
-		exit = salir;
+	public void ejecuta() {
+		setVientoPendienteModificada();
 	}
 }
 

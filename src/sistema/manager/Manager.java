@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.SwingUtilities;
-
 import sistema.entidades.carretera.tramocarreraciclista.TramoCiclista;
 import sistema.entidades.personas.ciclistas.Ciclista;
 import sistema.entidades.tiempo.Reloj;
@@ -55,11 +53,13 @@ public class Manager {
 	private Dispatcher dispatcher;
 	private ParseadorComandos parser;
 	
+	Lector lectorConfiguracion;
+	
 	/**
 	 * Carga la carretera de la carrera ciclista.
 	 */
 	private void cargarConfiguracion() {
-		Lector lectorConfiguracion = new Lector(DEFAULT_CONFIG_PATH, true);
+		lectorConfiguracion = new Lector(DEFAULT_CONFIG_PATH, true);
 		
 		String configuracioncarreraciclista = lectorConfiguracion.cargarFicheroCompelto();
 		
@@ -91,15 +91,8 @@ public class Manager {
 		reloj = new Reloj();
 		ciclistas = new ArrayList<Ciclista>();
 		factores = new ArrayList<FactoresExternos>();
+		ventana = new Ventana(parser);
 		
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				ventana = new Ventana(parser);
-			}
-		});
-		
-		while (ventana == null) {System.out.println("esperando a la ventana");}
 		formateador = new FormateadorDatosVista(listasalidadatos, ventana);
 		
 		// Bicicletas para los ciclistas.
@@ -148,20 +141,19 @@ public class Manager {
 	 */
 	public void ejecutar() {
 		
-		for (ObjetosQueSeEjecutan objetoejecutable : listaejecutables) {
-			new Thread(objetoejecutable).start();
-		}
+		while ( reloj.getHoras() < 2 ) {
 		
-		while ( reloj.getHoras() < 2 ) {}
+			for (ObjetosQueSeEjecutan objetoejecutable : listaejecutables) {
+				objetoejecutable.ejecuta();
+			}
+		}
 	}
 	
 	/**
 	 * Finaliza el contexto de la aplicación.
 	 */
 	public void finalizar() {
-		for (ObjetosQueSeEjecutan objetoaparar : listaejecutables) {
-			objetoaparar.salir(true);
-		}
+		lectorConfiguracion.finalizarLecturas();
 	}
 	
 	/**

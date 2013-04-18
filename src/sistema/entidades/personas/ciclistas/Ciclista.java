@@ -66,11 +66,8 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 * @return Una cadena de texto separada por tokens.
 	 */
 	@Override
-	public void run() {
-		
-		while (!exit) {
-			pedalear();
-		}
+	public void ejecuta() {
+		pedalear();
 	}
 	
 	/**
@@ -96,12 +93,11 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 	 */
 	public void pedalear() {
 		
-		if (reloj.getSegundos()!=segundos)
-		{
+		if (reloj.getSegundos() != segundos) {
+			
 			bicicletamontada.darPedalada(cadencia);
 	
 			segundos = reloj.getSegundos();
-		//	System.out.println(reloj.getSegundos());
 		}
 	}
 	

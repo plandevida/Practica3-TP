@@ -20,7 +20,7 @@ public class Persona implements ObjetosQueSeEjecutan {
 	
 	// Este método tiene que hacer las veces del antiguo ejecuta.
 	@Override
-	public void run() { }
+	public void ejecuta() { }
 	
 	/**
 	 * Obtiene el peso de la persona.
@@ -70,12 +70,5 @@ public class Persona implements ObjetosQueSeEjecutan {
 	 */
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-	
-	protected boolean exit = false;
-	
-	@Override
-	public void salir(boolean salir) {
-		exit = salir;
 	}
 }

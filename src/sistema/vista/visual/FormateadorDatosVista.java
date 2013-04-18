@@ -92,7 +92,7 @@ public class FormateadorDatosVista implements InterfaceSalidaDatos, ObjetosQueSe
 	}
 	
 	@Override
-	public void run() {
+	public void ejecuta() {
 		
 		while (!exit) {
 			mostrarDatos();

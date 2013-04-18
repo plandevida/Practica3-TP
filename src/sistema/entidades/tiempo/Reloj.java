@@ -6,6 +6,10 @@ import sistema.interfaces.ObjetosConSalidaDeDatos;
 
 
 public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
+	
+	// Los milisegundos que lleva.
+	private int milisegundos;
+	
 	// Los segundos que lleva, es una unidad mas pequeña que los minutos
 	private int segundos;
 	
@@ -16,6 +20,7 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 	private int horas;
 	
 	public Reloj() {
+		milisegundos = 0;
 		segundos = 0;
 		minutos = 0;
 		horas = 0;
@@ -37,14 +42,14 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 	@Override
 	public void nuevoImpulso() {
 		
-//		if (++impulsos >= 100) {
-//			impulsos = 0;
-			try {
-				Thread.sleep(1000);
-			}	
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+		if (++impulsos >= 1000) {
+			impulsos = 0;
+//			try {
+//				Thread.sleep(1000);
+//			}	
+//			catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 			if (++segundos >= 60) {
 				segundos = 0;
 				if (++minutos >= 60) {
@@ -52,7 +57,7 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 					horas++;
 				}
 			}
-//		}
+		}
 	}
 	/**
 	 * Método para obtener una salida de datos de un objeto.
@@ -71,6 +76,16 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 		
 		return new StringTokenizer(mensaje.toString(), ",");
 	}
+	
+	/**
+	 * Metodo para obtener los milisegundos.
+	 * 
+	 * @return Los milisegundos
+	 */
+	public int getMilisegundos() {
+		return milisegundos;
+	}
+	
 	/**
 	 * Metodo para obtener los segundos.
 	 * 

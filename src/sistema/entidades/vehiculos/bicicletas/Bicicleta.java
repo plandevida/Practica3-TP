@@ -30,9 +30,9 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 	
 	protected double radiorueda;
 	
-	protected double pendiente;
+	protected double factorpendiente;
 	
-	protected double viento;
+	protected double factorviento;
 	
 	public Bicicleta() {
 	
@@ -42,8 +42,8 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 		setPlatoactual(0);
 		radiorueda = 0.2d;
 		
-		pendiente = 1;
-		viento = 0;
+		factorpendiente = 1;
+		factorviento = 0;
 	}
 
 	/**
@@ -116,8 +116,8 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 	public void darPedalada(double cadenciaciclista) {
 		double velocidad = calcularVelocidadCadencia(cadenciaciclista);
 		
-		velocidad = velocidad * pendiente;
-		velocidad = velocidad + velocidad*viento;
+		velocidad = velocidad * factorpendiente;
+		velocidad = velocidad + velocidad*factorviento;
 		setEspacioRecorrido(espacioDePedalada());
 		setVelocidadIncremento(velocidad);
 	}
@@ -249,19 +249,19 @@ public class Bicicleta extends Vehiculo implements ObjetosConSalidaDeDatos {
 	}
 
 	public double getPendiente() {
-		return pendiente;
+		return factorpendiente;
 	}
 
 	public void setPendiente(double pendiente) {
-		this.pendiente = pendiente;
+		this.factorpendiente = pendiente;
 	}
 
 	public double getViento() {
-		return viento;
+		return factorviento;
 	}
 
 	public void setViento(double viento) {
-		this.viento = viento;
+		this.factorviento = viento;
 	}
 
 //	 private enum Pinhones {

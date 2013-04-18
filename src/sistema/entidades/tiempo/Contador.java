@@ -12,21 +12,8 @@ public class Contador implements ObjetosQueSeEjecutan {
 	/**
 	 * Metodo que ejecuta.
 	 */
-	public void run() {
-		while (!exit) {
-			nuevoImpulso();
-		}
-	}
-	
-	// Variable que controla la salida del hilo.
-	private boolean exit = false;
-	
-	/**
-	 * Método que cambia el estado de salida del hilo.
-	 * @param salir
-	 */
-	public void salir(boolean salir) {
-		exit = salir;
+	public void ejecuta() {
+		nuevoImpulso();
 	}
 	
 	/**
