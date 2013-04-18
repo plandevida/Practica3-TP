@@ -86,8 +86,6 @@ public class FormateadorDatosVista implements InterfaceSalidaDatos, ObjetosQueSe
 	@Override
 	public void mostrarDatos() {
 		
-		vista.limpia();
-		
 		for(ObjetosConSalidaDeDatos objetoamostrar : registroobjetossalidadatos) {
 			vista.ponerDatosEnVentana(objetoamostrar.getIdentificadorSalidaDatos(), formateadorDatos(objetoamostrar));
 		}
