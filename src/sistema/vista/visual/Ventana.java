@@ -5,6 +5,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.Rectangle;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +18,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import sistema.entrada.parseador.parser.ParseadorComandos;
@@ -39,6 +40,8 @@ public class Ventana extends JFrame {
 	
 	private JPanel panelCiclistas;
 	private JTextField camporeloj;
+	
+	JTextField campocomandos;
 	
 	public Ventana(ParseadorComandos parser) {
 		parsercomandos = parser;
@@ -97,41 +100,27 @@ public class Ventana extends JFrame {
 	 */
 	private JPanel crearComandero() {
 		JPanel panel = new JPanel();
+		panel.setPreferredSize(new Dimension(120, 60));
 		
 		JLabel campocomandosetiqueta = new JLabel("Comandos: ");
+	
+		campocomandos = new JTextField();
+		campocomandos.setSize(new Dimension(120, 60));
+		campocomandos.setText("Escriba un comando");
 		
-		JTextField campocomandos = new JTextField();
-		campocomandos.setBounds(new Rectangle(120, 50));
+		campocomandos.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				campocomandos.setText("");
+			}
+		});
 		
-		campocomandos.getDocument().addDocumentListener(new DocumentListener() {
+		campocomandos.addKeyListener(new KeyAdapter() {
 			@Override
-			public void removeUpdate(DocumentEvent e) {
-				try {
-					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
-				} catch (BadLocationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void insertUpdate(DocumentEvent e) {
-				try {
-					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
-				} catch (BadLocationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void changedUpdate(DocumentEvent e) {
-				try {
-					parsercomandos.parse(e.getDocument().getText(0, e.getDocument().getLength()));
-				} catch (BadLocationException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+			public void keyTyped(KeyEvent e) {
+				String comando = ((JTextField) e.getSource()).getText();
+				
+				parsercomandos.parse(comando);
 			}
 		});
 		

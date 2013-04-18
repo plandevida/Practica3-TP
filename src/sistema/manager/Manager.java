@@ -92,6 +92,9 @@ public class Manager {
 		listaejecutables = new ArrayList<ObjetosQueSeEjecutan>();
 		listasalidadatos = new ArrayList<ObjetosConSalidaDeDatos>();
 		
+		dispatcher = new Dispatcher();
+		parser = new ParseadorComandos(dispatcher, listaejecutables);
+		
 		reloj = new Reloj();
 		ciclistas = new ArrayList<Ciclista>();
 		bicicletas = new ArrayList<Bicicleta>();
@@ -133,9 +136,6 @@ public class Manager {
 		
 		listaejecutables.add(formateador);
 		listaejecutables.add(factoresexternos);
-		
-		dispatcher = new Dispatcher();
-		parser = new ParseadorComandos(dispatcher, listaejecutables);
 	}
 	
 	/**
