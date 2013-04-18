@@ -38,14 +38,18 @@ public class Manager {
 	
 	// Entidades del sistema.
 	private List<Ciclista> ciclistas;
-	private Bicicleta bicicleta;
+	
+	private Bicicleta bicicleta0;
 	private Bicicleta bicicleta1;
 	private Bicicleta bicicleta2;
 	private Bicicleta bicicleta3;
 	
-	private List<FactoresExternos> factores;
+	private List<Bicicleta> bicicletas;
+	
 	private Ventana ventana;
 	private FormateadorDatosVista formateador;
+	
+	private FactoresExternos factoresexternos;
 	
 	private Reloj reloj;
 	
@@ -90,29 +94,31 @@ public class Manager {
 		
 		reloj = new Reloj();
 		ciclistas = new ArrayList<Ciclista>();
-		factores = new ArrayList<FactoresExternos>();
+		bicicletas = new ArrayList<Bicicleta>();
 		ventana = new Ventana(parser);
 		
 		formateador = new FormateadorDatosVista(listasalidadatos, ventana);
 		
 		// Bicicletas para los ciclistas.
-		bicicleta = new Bicicleta();
+		bicicleta0 = new Bicicleta();
 		bicicleta1 = new Bicicleta();
 		bicicleta2 = new Bicicleta();
 		bicicleta3 = new Bicicleta();
 		
-		factores.add(new FactoresExternos(bicicleta, carreteradecarreraciclsta));
-		factores.add(new FactoresExternos(bicicleta1, carreteradecarreraciclsta));
-		factores.add(new FactoresExternos(bicicleta2, carreteradecarreraciclsta));
-		factores.add(new FactoresExternos(bicicleta3, carreteradecarreraciclsta));
+		bicicletas.add(bicicleta0);
+		bicicletas.add(bicicleta1);
+		bicicletas.add(bicicleta2);
+		bicicletas.add(bicicleta3);
 		
-		ciclistas.add(new Ciclista("Pamela", 1, 0.5, bicicleta, reloj));
+		factoresexternos = new FactoresExternos(bicicletas, carreteradecarreraciclsta);
+		
+		ciclistas.add(new Ciclista("Pamela", 1, 0.5, bicicleta0, reloj));
 		ciclistas.add(new Ciclista("Pedro", 2, 1.5, bicicleta1, reloj));
 		ciclistas.add(new Ciclista("Ana", 3, 1.0, bicicleta2, reloj));
 		ciclistas.add(new Ciclista("Juan", 4, 0.75, bicicleta3, reloj));
 		
 		listasalidadatos.add(reloj);
-		listasalidadatos.add(bicicleta);
+		listasalidadatos.add(bicicleta0);
 		listasalidadatos.add(bicicleta1);
 		listasalidadatos.add(bicicleta2);
 		listasalidadatos.add(bicicleta3);
@@ -125,12 +131,8 @@ public class Manager {
 			listaejecutables.add(ciclista);
 		}
 		
-		//Se registran los factores externos
-		for (FactoresExternos factor : factores){
-			listaejecutables.add(factor);
-		}
-		
 		listaejecutables.add(formateador);
+		listaejecutables.add(factoresexternos);
 		
 		dispatcher = new Dispatcher();
 		parser = new ParseadorComandos(dispatcher, listaejecutables);

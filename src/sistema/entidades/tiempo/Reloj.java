@@ -42,19 +42,16 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 	@Override
 	public void nuevoImpulso() {
 		
-		if (++impulsos >= 1000) {
+		if (++impulsos >= 100) {
 			impulsos = 0;
-//			try {
-//				Thread.sleep(1000);
-//			}	
-//			catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-			if (++segundos >= 60) {
-				segundos = 0;
-				if (++minutos >= 60) {
-					minutos = 0;
-					horas++;
+			if (++milisegundos >= 1000) {
+				milisegundos = 0;
+				if (++segundos >= 60) {
+					segundos = 0;
+					if (++minutos >= 60) {
+						minutos = 0;
+						horas++;
+					}
 				}
 			}
 		}
@@ -71,6 +68,8 @@ public class Reloj extends Contador implements ObjetosConSalidaDeDatos {
 		mensaje.append(getMinutos());
 		mensaje.append(",");
 		mensaje.append(getSegundos());
+		mensaje.append(",");
+		mensaje.append(getMilisegundos());
 		mensaje.append(",");
 		mensaje.append(getImpulsos());
 		

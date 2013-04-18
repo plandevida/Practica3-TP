@@ -1,5 +1,6 @@
 package sistema.factoresexternos;
 
+import java.util.List;
 import java.util.Map;
 
 import sistema.entidades.carretera.tramocarreraciclista.TramoCiclista;
@@ -13,14 +14,14 @@ import sistema.interfaces.ObjetosQueSeEjecutan;
  */
 public class FactoresExternos implements ObjetosQueSeEjecutan {
 	
-	private Bicicleta bici;
+	private List<Bicicleta> bicicletas;
 	
 	//Mapa de la carretera
 	private Map<Integer, TramoCiclista> carreteradecarreraciclista;
 	
-	public FactoresExternos(Bicicleta bici, Map<Integer, TramoCiclista> carreteradecarreraciclista) {
+	public FactoresExternos(List<Bicicleta> bicis, Map<Integer, TramoCiclista> carreteradecarreraciclista) {
 		
-		this.bici = bici;
+		this.bicicletas = bicis;
 		this.carreteradecarreraciclista = carreteradecarreraciclista;
 	}
 	
@@ -32,12 +33,15 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 		
 		TramoCiclista tramo = new TramoCiclista(0, 0, null, 0);
 		
-		for(Integer reco : carreteradecarreraciclista.keySet()) {
-
-			if ( carreteradecarreraciclista.get(reco).getKilometros() <= (int) bici.getEspacioRecorrido() ) {
-				tramo = carreteradecarreraciclista.get(reco);
+		for(Bicicleta bici : bicicletas) {
+			for(Integer reco : carreteradecarreraciclista.keySet()) {
+	
+				if ( carreteradecarreraciclista.get(reco).getKilometros() <= (int) bici.getEspacioRecorrido() ) {
+					tramo = carreteradecarreraciclista.get(reco);
+				}
 			}
 		}
+		
 		return tramo;
 	}
 	
@@ -93,10 +97,11 @@ public class FactoresExternos implements ObjetosQueSeEjecutan {
 	 */
 	private void setVientoPendienteModificada() {
 
-		bici.setPendiente(pendienteTramoActual()) ;
-		
-		bici.setViento(vientoTramoActual());
-		
+		for(Bicicleta bici : bicicletas) {
+			bici.setPendiente(pendienteTramoActual()) ;
+			
+			bici.setViento(vientoTramoActual());
+		}
 	}
 
 

@@ -72,6 +72,8 @@ public class FormateadorDatosVista implements InterfaceSalidaDatos, ObjetosQueSe
 					.append((String) mensaje.nextToken())
 					.append("s ")
 					.append((String) mensaje.nextToken())
+					.append("ms ")
+					.append((String) mensaje.nextToken())
 					.append(" impulsos");
 			
 			break;
@@ -93,15 +95,6 @@ public class FormateadorDatosVista implements InterfaceSalidaDatos, ObjetosQueSe
 	
 	@Override
 	public void ejecuta() {
-		
-		while (!exit) {
-			mostrarDatos();
-		}
-	}
-	
-	private boolean exit = false;
-	
-	public void salir(boolean salir) {
-		exit = salir;
+		mostrarDatos();
 	}
 }
