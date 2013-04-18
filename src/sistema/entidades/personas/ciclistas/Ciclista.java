@@ -59,12 +59,6 @@ public class Ciclista extends Persona implements ObjetosConSalidaDeDatos {
 		bicicletamontada.setId(numeromallot);
 	}
 	
-	/**
-	 * Metodo que evalua la velociadad de la bicicleta, en fucion de ella
-	 * decide si frenar o serguir pedaleando.
-	 * 
-	 * @return Una cadena de texto separada por tokens.
-	 */
 	@Override
 	public void ejecuta() {
 		pedalear();

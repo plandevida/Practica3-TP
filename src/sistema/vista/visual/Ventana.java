@@ -138,7 +138,7 @@ public class Ventana extends JFrame {
 	 * 
 	 * @param nombre Nombre del area de texto.
 	 */
-	private void añadirTextArea(String nombre) {
+	private void anadirTextArea(String nombre) {
 		
 		JTextArea nuevaTextArea = new JTextArea();
 		nuevaTextArea.setName(nombre);
@@ -156,8 +156,8 @@ public class Ventana extends JFrame {
 	 * Añade nueva información en un área de texto o crea una nueva
 	 * si fuese necesario.
 	 * 
-	 * @param objetoamostrar Objeto que mostrará sus datos.
-	 * @param mensajeFormateado Los datos formateados a poner en el área.
+	 * @param id Objeto que mostrará sus datos.
+	 * @param mensaje Los datos formateados a poner en el área.
 	 */
 	public void ponerDatosEnVentana(String id, String mensaje) {
 		JTextComponent componenteexistente = null;
@@ -171,102 +171,11 @@ public class Ventana extends JFrame {
 		}
 		
 		if (componenteexistente == null) {
-			añadirTextArea(id);
+			anadirTextArea(id);
 			
 			ponerDatosEnVentana(id, mensaje);
 		}
-
-		/**
-		 * Formatea los datos del objeto que se va a mostrar
-		 * y lo pone en su área de texto en base al nombre de
-		 * ambos.
-		 * 
-		 * @param objetoamostrar Objeto que mostrará sus datos.
-		 */
-//	public void ponerDatosEnVentana(ObjetosConSalidaDeDatos objetoamostrar) {
-//		StringTokenizer mensaje = objetoamostrar.mostrarDatos();
-//
-//		String formato = mensaje.nextToken();
-//		
-//		StringBuilder datos = new StringBuilder();
-//		
-//		switch (formato) {
-//
-//		// Caso para el formato de la bicicleta
-//		case "#bicicleta#":
-//			datos.append("velocidad: ")
-//				.append(mensaje.nextToken());
-//			
-//			añadirEnTextArea(objetoamostrar, datos.toString());
-//			
-//			break;
-//
-//		// Caso para el formato del ciclista
-//		case "#ciclista#":
-//			datos.append("nombre: ")
-//			.append(mensaje.nextToken()).append('\n')
-//			.append("peso: ")
-//			.append(mensaje.nextToken()).append('\n')
-//			.append("cadencia: ")
-//			.append(mensaje.nextToken());
-//
-//			añadirEnTextArea(objetoamostrar, datos.toString());
-//			
-//			break;
-//
-//		// Caso para el formato reloj
-//		case "#reloj#":
-//			datos.append((String) mensaje.nextToken()).append("h ")
-//					.append((String) mensaje.nextToken())
-//					.append("m ")
-//					.append((String) mensaje.nextToken())
-//					.append("s ")
-//					.append((String) mensaje.nextToken())
-//					.append(" impulsos");
-//
-//			camporeloj.setText(datos.toString());
-//			
-//			break;
-//
-//		default:
-//			break;
-//		}
 	}
-	
-	/**
-	 * Añade nueva información en un área de texto o crea una nueva
-	 * si fuese necesario.
-	 * 
-	 * @param objetoamostrar Objeto que mostrará sus datos.
-	 * @param mensajeFormateado Los datos formateados a poner en el área.
-	 */
-//	private void añadirEnTextArea(ObjetosConSalidaDeDatos objetoamostrar, String mensajeFormateado) {
-//		
-//		JTextArea areaExistente = null;
-//		
-//		for (JTextArea area : areasCreadas) {
-//			if (area.getName().equals(objetoamostrar.getIdentificadorSalidaDatos())) {
-//				area.setText(mensajeFormateado);
-//				
-//				areaExistente = area;
-//			}
-//		}
-//		
-//		if (areaExistente == null) {
-//			añadirTextArea(objetoamostrar.getIdentificadorSalidaDatos());
-//			
-//			añadirEnTextArea(objetoamostrar, mensajeFormateado);
-//		}
-//	}
-//	
-//	/**
-//	 * Limpia el contenido de las áreas de texto.
-//	 */
-//	public void limpia() {
-//		for (JTextArea area : areasCreadas) {
-//			area.setText("");
-//		}
-//	}
 	
 	public void limpia() {
 		for (JTextComponent area : componenetescreados) {
