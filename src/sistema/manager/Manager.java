@@ -101,6 +101,12 @@ public class Manager {
 		bicicletas = new ArrayList<Bicicleta>();
 		ventana = new Ventana(parser);
 		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		
 		formateador = new FormateadorDatosVista(listasalidadatos, ventana);
 		
 		// Bicicletas para los ciclistas.

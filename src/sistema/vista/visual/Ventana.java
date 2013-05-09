@@ -40,7 +40,6 @@ public class Ventana extends JFrame {
 	
 	private JPanel panelciclistasylog;
 	private JPanel panelciclistas;
-	private JPanel panellog;
 	private JTextField camporeloj;
 	
 	JTextField campocomandos;
@@ -90,12 +89,13 @@ public class Ventana extends JFrame {
 	 * @return
 	 */
 	public JPanel crearLogeador() {
-		JPanel panel = new JPanel();
+		
+		JPanel panellog = new JPanel();
 		
 		JTextArea arealog = new JTextArea();
 		arealog.setBorder(new TitledBorder("Log"));
 		
-		panel.add(arealog);
+		panellog.add(arealog);
 		
 		pack();
 		
